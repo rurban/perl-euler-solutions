@@ -17,6 +17,7 @@ L<https://projecteuler.net/problem=15>
 # n-by-n grid => all combinations of n downs and n rights 
 # => 2n!/((n!)(2n-n)!)) = 2n!/(n!)^2
 
+# INCORRECT
 use integer;
 my $n = shift || 20;
 
