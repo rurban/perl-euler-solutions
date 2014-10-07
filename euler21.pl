@@ -36,13 +36,15 @@ sub d {
   $sum
 }
 
-my $sum = 0;
+my ($sum, %h);
 for my $a (2..$max-1) {
+  next if $h{$a};
   my $b = d($a);
   print "$b = d($a)\n" if DEBUG;
   if ($a != $b and $a == d($b)) {
-    $sum += $a + $b;
+    $h{$b}++;
     print "pair: $a $b\n";
+    $sum += $a + $b;
   }
 }
-print $sum / 2;
+print $sum;
