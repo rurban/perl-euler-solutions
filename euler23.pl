@@ -41,7 +41,6 @@ sub d {
       $sum += $i;
     }
   }
-  # print "$n: $sum - (",join(",",@div).")\n" if DEBUG;
   $sum
 }
 
@@ -50,35 +49,28 @@ my ($sum, %ab, @keys, %uneven);
 sub is_sum {
   my $n = shift;
   return undef if $n < 24; # the smallest sum of ab's
-  if ($n % 2) {
-    return undef if $uneven{$n};
-  }
+  return undef if $n % 2 and $n < 945;
   #return 1 if $n > 28123;
   for my $a (@keys) {
     return if $a > $n;
+    print "$n = $a + ",$n-$a,"\n" if DEBUG and $ab{$n - $a};
     return 1 if $ab{$n - $a};
     print "$n != $a\n" if DEBUG;
   }
   undef
 }
-
 for my $i (12..$m) {
   if (d($i) > $i) {
     $ab{$i} = 1;
     push @keys, $i;
-    # we have a very low number of uneven ab's, check them in the sum
-    if ($i % 2) { # 945, 1575 are the first uneven numbers
-      $uneven{$i}++ ;
-      print "uneven: $i\n" if DEBUG;
-    }
+    # we have a very low number of uneven ab's. check them in the sum
+    #if ($i % 2) { # 945, 1575 are the first uneven numbers
   }
 }
-
-for my $i (1..$m+10000) {
+for my $i (1..$m) {
   unless (is_sum($i)) {
     $sum += $i;
     print $i,"\n" if DEBUG; 
-    print $i,"\n" if $i > $m; # better control that math
   }
 }
-print $sum; # 297633032, 4372545, 5089756 are all incorrect
+print $sum;
