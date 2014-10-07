@@ -42,6 +42,7 @@ L<https://projecteuler.net/problem=18>
 =cut
 
 use integer;
+use constant DEBUG => @ARGV;
 
 my @t = (
                       [75],
@@ -63,28 +64,29 @@ my @t = (
 
 my $max, $c;
 my $rows = scalar @t;
+
 # A-B search or brute-force. problem 67 reqs tree-pruning
 sub pick {
   my ($i, $r, $sum) = @_;
   if ($r > $#t) {
-    print "($i, $r, $sum)\n";
+    print "($i, $r, $sum)\n" if DEBUG;
     $max = $sum if $sum > $max;
     return $max;
   }
   # prune tree if we cannot reach max anymore
-  # remaning steps: 14-$r
+  # remaining steps: 14-$r ad-hoc, without lookahead
   if ($sum + ($rows-$r)*99 < $max) {
-    print "cut $r: $sum too low to reach $max\n";
+    print "cut $r: $sum too low to reach $max\n" if DEBUG;
     return $max;
   }
   my @row = @{$t[$r]};
   $c++;
   pick($i+1, $r+1, $sum + $row[$i+1]) if $i<$#row;
-  print "($i, $r, $sum)\n";
+  print "($i, $r, $sum)\n" if DEBUG;
   pick($i,   $r+1, $sum + $row[$i]);
-  print "($i, $r, $sum)\n";
+  print "($i, $r, $sum)\n" if DEBUG;
   $max
 }
 
 print pick(0, 0, 0); #16384 => 842 routes with pruning
-print "\nroutes = $c";
+print "\nroutes = $c" if DEBUG;
