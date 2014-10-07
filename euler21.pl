@@ -32,7 +32,7 @@ sub d {
       $sum += $i;
     }
   }
-  #print "$n: $sum - (",join(",",@div).")\n" if DEBUG;
+  print "$n: $sum - (",join(",",@div).")\n" if DEBUG;
   $sum
 }
 
@@ -45,4 +45,4 @@ for my $a (2..$max-1) {
     print "pair: $a $b\n";
   }
 }
-print $sum;
+print $sum / 2;
