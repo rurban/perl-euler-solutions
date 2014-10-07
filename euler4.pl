@@ -13,8 +13,6 @@ L<https://projecteuler.net/problem=4>
 =cut
 
 use integer;
-
-#$max = 99;
 $max = 999;
 
 sub is_palindrome {
