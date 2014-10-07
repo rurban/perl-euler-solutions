@@ -11,16 +11,17 @@ L<https://projecteuler.net/problem=3>
 =cut
 
 use Math::Prime::XS 'is_prime';
+use integer;
 
 #$n = 13195;
 $n = 600851475143;
 
-my $_ = int(sqrt($n));
-$_-- if $_ % 2 == 0;
-while ($_ > 1) {
-  if (is_prime($_) and $n % $_ == 0) {
-    print "$_\n";
+my $i = int(sqrt($n));
+$i-- if $i % 2 == 0;
+while ($i > 1) {
+  if (is_prime($i) and $n % $i == 0) {
+    print "$i\n";
     exit;
   }
-  $_ -= 2;
+  $i -= 2;
 }

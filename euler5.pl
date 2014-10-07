@@ -14,6 +14,7 @@ L<https://projecteuler.net/problem=5>
 
 use integer;
 my $i = 1;
+
 LOOP:
 while ($i++) {
     for (2 .. 20) {
